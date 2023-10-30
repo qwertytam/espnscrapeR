@@ -48,6 +48,8 @@ get_nfl_schedule <- function(season){
   nfl_data <- raw_sched[["events"]] %>%
     tibble(data = .) %>%
     unnest_wider(data) %>%
+    unnest_wider(week) %>%
+    rename(week = number) %>%
     unchop(competitions) %>%
     select(-id, -uid, -date, -status) %>%
     unnest_wider(competitions) %>%
